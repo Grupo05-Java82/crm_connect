@@ -1,5 +1,7 @@
 package com.generation.connect_crm.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -35,11 +37,11 @@ public class Usuario {
 	@Column(length = 300)
 	String foto;
 	
-	/*
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	 List<Oportunidade> oportunidades;
-	 */
+	 
 	
 	public Long getId() {
 		return id;
