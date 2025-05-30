@@ -19,7 +19,7 @@ public class Cliente{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(max=255)
+	@Size(max=255, message = "o tamanho maximo do atributo nome é 255 ")
 	@NotBlank(message = "O Atributo Nome é Obrigatório!")
 	private String nome;
 	
