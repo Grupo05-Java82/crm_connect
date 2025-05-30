@@ -28,12 +28,12 @@ public class ClienteController {
 		return ResponseEntity.ok(clienteRepository.findAll());
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> getById(@PathVariable Long id){
-		return clienteRepository.findById(id)
-			.map(resposta -> ResponseEntity.ok(resposta))
-			.orElse(ResponseEntity.notFound().build());
-	}
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Cliente> getById(@PathVariable Long id){
+//		return clienteRepository.findById(id)
+//			.map(resposta -> ResponseEntity.ok(resposta))
+//			.orElse(ResponseEntity.notFound().build());
+//	}
 	
 	/*
 	@PostMapping

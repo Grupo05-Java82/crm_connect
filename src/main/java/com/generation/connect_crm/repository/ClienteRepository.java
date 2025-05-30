@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.generation.connect_crm.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-	List<Cliente> findAllByEmailContainingIgnoreCase(String email);
+	List<Cliente>findAllByEmailContainingIgnoreCase(String email);
 }
