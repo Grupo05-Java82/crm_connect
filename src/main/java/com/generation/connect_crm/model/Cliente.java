@@ -37,7 +37,7 @@ public class Cliente{
 	
 	
 //	@oneToMany(fetch = FetchType.EAGER, mappedBy = "id_cliente", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("id_cliente")
+	//@JsonIgnoreProperties("id_cliente")
 //	private List<Oportunidade> oportunidade;
 	
 	public Long getId() {
