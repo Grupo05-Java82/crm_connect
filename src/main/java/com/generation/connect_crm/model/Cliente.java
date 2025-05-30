@@ -35,7 +35,6 @@ public class Cliente{
 	@NotBlank(message = "O Atributo Interesse é obrigatorio para sabermos qual o produto que o cliente compra nosso")
 	private String interesse;
 	
-	
 //	@oneToMany(fetch = FetchType.EAGER, mappedBy = "id_cliente", cascade = CascadeType.REMOVE)
 	//@JsonIgnoreProperties("id_cliente")
 //	private List<Oportunidade> oportunidade;
