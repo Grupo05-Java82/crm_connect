@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size; // Adicionar para Size
 
 @Entity
 @Table(name = "tb_usuario")
@@ -25,23 +26,27 @@ public class Usuario {
 	Long id;
 	
 	@NotBlank(message = "O Atributo Nome é Obrigatório!")
+	@Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.") // Adicionado Size
 	String nome;
 	
 	@NotBlank(message = "O Atributo email é Obrigatório!")
 	@Email(message = "O Atributo deve ser um email válido!")
-	String usuario;
+	@Size(max = 255, message = "O e-mail não pode exceder 255 caracteres.") // Adicionado Size
+	String usuario; // Campo para o e-mail (login)
 	
 	@NotBlank(message = "O atributo senha é obrigatório")
+	@Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres.") // Adicionado Size
 	String senha;
 	
 	@Column(length = 300)
+	@Size(max = 300, message = "A URL da foto não pode exceder 300 caracteres.") // Adicionado Size
 	String foto;
 	
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	// Renomeado para 'oportunidades' no plural para clareza
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE) // FetchType LAZY é mais performático
 	@JsonIgnoreProperties("usuario")
-	 List<Oportunidade> oportunidades;
-	 
+	List<Oportunidade> oportunidades; // Getter/Setter serão atualizados
+	
 	
 	public Long getId() {
 		return id;
@@ -81,5 +86,14 @@ public class Usuario {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
-	}	
+	}
+	
+	// Adicionar getter e setter para a lista de oportunidades
+	public List<Oportunidade> getOportunidades() {
+		return oportunidades;
+	}
+
+	public void setOportunidades(List<Oportunidade> oportunidades) {
+		this.oportunidades = oportunidades;
+	}
 }
