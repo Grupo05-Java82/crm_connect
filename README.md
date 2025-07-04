@@ -3,7 +3,7 @@
 <br />
 
 <div align="center">
-   <img src="https://i.imgur.com/D0AwwmT.png" title="source: imgur.com" /> 
+   <img src="https://i.imgur.com/I3LoQIy.png" title="source: imgur.com" /> 
 </div>
 
 <br /><br />
@@ -68,7 +68,7 @@ A API desenvolvida atua como o **núcleo** da aplicação **Connect**, realizand
 Adicione a imagem do Diagrama de Classes (se houver):
 
 <div align="center">
-   <img src="https://github.com/user-attachments/assets/18b74884-260e-4dad-9f9b-60f0895608cf" alt="Diagrama de Classe"/>
+   <img src="https://i.imgur.com/4WrtHM3.png" alt="Diagrama de Classe"/>
 </div>
 
 ---
