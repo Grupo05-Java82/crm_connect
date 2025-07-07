@@ -95,28 +95,42 @@ public class ClienteController {
 
 	}*/
 	
-	@PutMapping // Descomentado e corrigido
-	public ResponseEntity<?> put(@Valid @RequestBody Cliente cliente) {
-		// Verifica se o cliente existe pelo ID antes de tentar atualizar
-		if (clienteRepository.existsById(cliente.getId())){
-			// verifica se telefone e email já foi cadastrado
-			if (clienteRepository.existsByEmailIgnoreCase(cliente.getEmail())) {
-				return ResponseEntity
-						.status(HttpStatus.BAD_REQUEST)
-						.body("Erro: este e-mail já está cadastrado.");
-			}
-			if (clienteRepository.existsByTelefone(cliente.getTelefone())) {
-				return ResponseEntity
-						.status(HttpStatus.BAD_REQUEST)
-						.body("Erro: este Telefone já está cadastrado.");
-			}
-			return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.save(cliente));
-			
-		}		
-		
-		// Se o ID não existir, retorna NOT_FOUND
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	}
+	// No seu ClienteController.java
+
+@PutMapping
+public ResponseEntity<?> put(@Valid @RequestBody Cliente cliente) {
+    // 1. Verifica se o cliente existe pelo ID antes de tentar atualizar
+    if (clienteRepository.existsById(cliente.getId())){
+        // Busca o cliente existente no banco de dados para comparar o email atual
+        Cliente clienteExistente = clienteRepository.findById(cliente.getId()).get();
+
+        // Validação de Email:
+        // Só verifica se o email já existe para OUTRO cliente se o email foi alterado
+        if (!clienteExistente.getEmail().equalsIgnoreCase(cliente.getEmail())) { // Se o email NOVO é diferente do email ANTIGO
+            if (clienteRepository.existsByEmailIgnoreCase(cliente.getEmail())) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body("Erro: este e-mail já está cadastrado.");
+            }
+        }
+
+        // Validação de Telefone:
+        if (!clienteExistente.getTelefone().equals(cliente.getTelefone())) { // Se o telefone NOVO é diferente do telefone ANTIGO
+             if (clienteRepository.existsByTelefone(cliente.getTelefone())) {
+                 return ResponseEntity
+                         .status(HttpStatus.BAD_REQUEST)
+                         .body("Erro: este Telefone já está cadastrado.");
+             }
+        }
+
+        // Se passou nas validações, salva o cliente atualizado
+        return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.save(cliente));
+
+    }
+
+    // Se o ID não existir, retorna NOT_FOUND
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT) // Retorna 204 se a exclusão for bem-sucedida
